@@ -53,4 +53,14 @@ router.post('/', async (req, res) => {
   });
 
 
+  router.delete('/:id', (req, res) => {
+    db('accounts').where({ id: req.params.id }).del()
+      .then(affectedRows => {
+        res.json(affectedRows + ' rows got deleted!!');
+      })
+      .catch(error => {
+        res.status(500).json('this went wrong: ' + error.message)
+      })
+  });
+
 module.exports = router;
