@@ -5,7 +5,7 @@ const db = require('../dbConfig.js');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    db('accounts') 
+    db('accounts').orderBy('budget', 'desc').limit(10)
       .then(result => {
         res.json(result);
       })
