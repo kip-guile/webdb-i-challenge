@@ -37,4 +37,20 @@ router.post('/', async (req, res) => {
   });
 
 
+  router.put('/:id', (req, res) => {
+    db('accounts').where({ id: req.params.id })
+      .update({
+        name: req.body.name,
+        budget: req.body.budget,
+      })
+      .then(affectedAccounts => {
+        console.log(affectedAccounts);
+        res.json(affectedAccounts + ' accounts got changed!' );
+      })
+      .catch(error => {
+        res.status(500).json({ message: 'this went wrong: ' + error.message });
+      });
+  });
+
+
 module.exports = router;
